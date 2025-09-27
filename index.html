@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="assets/image/cakralogy.png"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cakralogy</title>
+  <link rel="icon" type="image/png" href="assets/image/tes-removebg-preview.png"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <style>
+
+    * {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #1E90FF;
+    }
+
+    /* ===== ANIMASI ===== */
+    @keyframes fadeIn {
+      0% {opacity:0; transform:translateY(20px);}
+      100%{opacity:1; transform:translateY(0);}
+    }
+    .fade-in {animation:fadeIn 1.2s ease-out forwards;}
+
+    @keyframes slideInLeft {
+      0%{opacity:0; transform:translateX(-50px);}
+      100%{opacity:1; transform:translateX(0);}
+    }
+    .slide-in-left {animation:slideInLeft 1s ease-out forwards;}
+
+    @keyframes slideInRight {
+      0%{opacity:0; transform:translateX(50px);}
+      100%{opacity:1; transform:translateX(0);}
+    }
+    .slide-in-right {animation:slideInRight 1s ease-out forwards;}
+
+    @keyframes float {
+      0%,100% {transform:translateY(0);}
+      50%{transform:translateY(-10px);}
+    }
+    .float {animation:float 4s ease-in-out infinite;}
+
+    /* ===== HOVER UNDERLINE MENU ===== */
+    .link-underline {
+      position: relative;
+      color: white;
+      padding-bottom: 3px;
+    }
+    .link-underline::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #FFD700;
+      transition: width 0.3s ease;
+    }
+    .link-underline:hover {
+      color: #FFD700;
+    }
+    .link-underline:hover::after {
+      width: 100%;
+    }
+
+    /* ===== MOBILE DROPDOWN ===== */
+    @keyframes dropdownOpen {
+      0% {opacity:0; transform: translateY(-10px);}
+      100% {opacity:1; transform: translateY(0);}
+    }
+    @keyframes dropdownClose {
+      0% {opacity:1; transform: translateY(0);}
+      100% {opacity:0; transform: translateY(-10px);}
+    }
+    .dropdown-open {animation: dropdownOpen 0.3s ease forwards;}
+    .dropdown-close {animation: dropdownClose 0.3s ease forwards;}
+
+    /* ===== TOMBOL HERO ===== */
+    .btn-hero {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-hero::before {
+      content:'';
+      position:absolute;
+      top:0; left:-100%;
+      width:100%; height:100%;
+      background:rgba(255,255,255,0.15);
+      transform:skewX(-20deg);
+      transition:left 0.5s;
+    }
+    .btn-hero:hover::before {
+      left:100%;
+    }
+
+    /* ===== DEKORASI HERO ===== */
+    .circle-deco {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(90px);
+      opacity: 0.2;
+    }
+   
+  </style>
+</head>
+<body class="text-gray-800 bg-gradient-to-br from-[#1992F0] via-[#1BAAF0] to-[#2563eb]">
+
+  <!-- ===== HEADER ===== -->
+  <header class="bg-[#1BAAF0]/90 sticky top-0 z-50 shadow-lg backdrop-blur">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-4 md:px-6 py-4">
+      
+      <!-- Logo -->
+      <div class="flex items-center space-x-3 slide-in-left">
+        <a href="#" class="flex items-center space-x-2">
+          <img src="assets/image/cakralogy.png" alt="logo" class="w-10 h-10 rounded-full"/>
+          <span class="text-white text-xl font-bold hover:text-yellow-300 transition">CAKRALOGY</span>
+        </a>
+      </div>
+
+      <!-- Menu Desktop -->
+      <nav class="hidden md:flex items-center space-x-6 text-white font-semibold slide-in-right">
+        <a href="#" class="link-underline">Home</a>
+        <a href="#" class="link-underline">About</a>
+        <a href="#" class="link-underline">Learning</a>
+        <a href="#" class="link-underline">Search</a>
+        <a href="#" class="link-underline">Collection</a>
+      </nav>
+
+      <!-- Profile Desktop -->
+      <div class="hidden md:block slide-in-right">
+        <img src="assets/image/cakralogy.png" alt="profile" class="w-10 h-10 rounded-full border-2 border-white hover:scale-110 transition-transform duration-300"/>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center space-x-4 slide-in-right">
+        <button id="mobile-menu-button" class="text-white focus:outline-none hover:scale-110 transition-transform duration-300">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+        <img src="assets/image/cakralogy.png" alt="profile" class="w-10 h-10 rounded-full border-2 border-white"/>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <nav id="mobile-menu"
+      class="hidden flex-col items-center space-y-2 bg-[#1BAAF0] px-4 py-3 md:hidden text-white font-semibold text-center">
+      <a href="#" class="link-underline block">Home <hr/></a>
+      <a href="#" class="link-underline block">About <hr/></a>
+      <a href="#" class="link-underline block">Learning <hr/></a>
+      <a href="#" class="link-underline block">Search <hr/></a>
+      <a href="#" class="link-underline block">Collection <hr/></a>
+    </nav>
+  </header>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="relative h-screen flex items-center overflow-hidden">
+    <!-- Dekorasi lingkaran blur -->
+    <div class="circle-deco top-10 right-10 w-64 h-64 bg-blue-300"></div>
+    <div class="circle-deco bottom-20 left-10 w-72 h-72 bg-purple-400"></div>
+
+    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8 px-6 relative z-10">
+      
+      <!-- Left Image -->
+      <div class="flex justify-center items-center fade-in order-1 md:order-none">
+        <img src="assets/image/cakralogy.png" alt="Robot Hero" 
+             class="w-3/4 md:w-full max-w-md hover:scale-105 transition-transform duration-500 float"/>
+      </div>
+      
+      <!-- Right Text -->
+      <div class="flex flex-col justify-center items-center md:items-start text-center md:text-left space-y-6 fade-in order-2 md:order-none">
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight slide-in-right text-white">
+          Welcome to 
+          <span class="bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500 bg-clip-text text-transparent">
+            Cakralogy
+          </span>
+        </h1>
+        <p class="text-white max-w-md slide-in-right">
+          Explore a world of technology and innovation. Your journey to knowledge starts here.
+        </p>
+
+        <!-- Tombol -->
+        <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 w-full sm:w-auto">
+          <a href="#" 
+             class="btn-hero w-full sm:w-40 text-center px-8 py-3 bg-orange-500 text-white font-semibold rounded-lg shadow-md hover:bg-orange-600 hover:shadow-lg transition duration-500 ease-out">
+            Search
+          </a>
+          <a href="#" 
+             class="btn-hero w-full sm:w-40 text-center px-8 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 hover:shadow-lg transition duration-500 ease-out">
+            Learn More
+          </a>
+        </div>
+
+        <!-- Decorative icons -->
+        <div class="flex space-x-6 mt-8">
+          <div class="w-4 h-4 rounded-full bg-yellow-300 animate-ping"></div>
+          <div class="w-4 h-4 rounded-full bg-orange-300 animate-ping"></div>
+          <div class="w-4 h-4 rounded-full bg-pink-300 animate-ping"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT SECTION ===== -->
+  <section class="text-white py-16 px-6">
+    <div class="max-w-7xl mx-auto space-y-16">
+
+      <div class="text-center" data-aos="fade-up">
+        <h2 class="text-4xl font-bold">
+          About 
+          <span class="bg-gradient-to-r from-yellow-400 to-blue-200 bg-clip-text text-transparent">
+            Cakralogy
+          </span>
+        </h2>
+      </div>
+
+      <!-- About Content -->
+      <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-12">
+
+        <!-- Left Side -->
+        <div class="space-y-6 md:w-1/2" data-aos="fade-left">
+          <p class="text-base text-gray-100 max-w-lg">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt magna aliqua. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+
+         <!-- ===== CARDS SECTION (HORIZONTAL RESPONSIVE) ===== -->
+<div class="flex space-x-4 overflow-x-auto pb-2 scrollbar-hide">
+  <!-- Card 1 -->
+  <div class="bluekotak bg-[#0B028C] rounded-xl p-4 text-center flex-shrink-0 w-32 sm:w-48">
+    <div class="w-6 h-6 mx-auto mb-2 bg-red-500 rounded-full"></div>
+    <h4 class="font-bold text-white">Lorem</h4>
+    <p class="text-sm text-gray-300">
+      Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt magna aliqua.
+    </p>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="bluekotak bg-[#0B028C] rounded-xl p-4 text-center flex-shrink-0 w-32 sm:w-48">
+    <div class="w-6 h-6 mx-auto mb-2 bg-orange-500 rounded-full"></div>
+    <h4 class="font-bold text-white">Lorem</h4>
+    <p class="text-sm text-gray-300">
+      Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt magna aliqua.
+    </p>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="bluekotak bg-[#0B028C] rounded-xl p-4 text-center flex-shrink-0 w-32 sm:w-48">
+    <div class="w-6 h-6 mx-auto mb-2 bg-yellow-400 rounded-full"></div>
+    <h4 class="font-bold text-white">Lorem</h4>
+    <p class="text-sm text-gray-300">
+      Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt magna aliqua.
+    </p>
+  </div>
+</div>
+
+
+          <!-- Button -->
+         <a href="#search" class="block mx-auto mt-4 px-6 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-300 transition text-center">
+  Start Learning
+</a>
+
+        </div>
+
+        <!-- Right Side (statistik) -->
+        <div class="space-y-6 md:w-1/2" data-aos="fade-right">
+          <div class="grid grid-cols-2 gap-6">
+            <div class="bg-blue-300 bg-opacity-30 backdrop-blur-md rounded-xl p-6 shadow-lg text-center">
+              <h3 class="text-3xl font-bold text-white">10</h3>
+              <p class="text-gray-100 mt-2">lorem ipsum</p>
+            </div>
+            <div class="bg-blue-300 bg-opacity-30 backdrop-blur-md rounded-xl p-6 shadow-lg text-center">
+              <h3 class="text-3xl font-bold text-white">10</h3>
+              <p class="text-gray-100 mt-2">lorem ipsum</p>
+            </div>
+          </div>
+          <div class="bg-blue-300 bg-opacity-30 backdrop-blur-md rounded-xl p-6 shadow-lg text-center">
+            <h3 class="text-3xl font-bold text-white">10+</h3>
+            <p class="text-gray-100 mt-2">lorem ipsum sir alet dolot</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== OUR JOURNEY ===== -->
+      <div class="space-y-12" data-aos="fade-down">
+        <h2 class="text-3xl font-bold text-center text-white">Our Journey</h2>
+
+        <!-- Timeline Container -->
+        <div class="relative max-w-4xl mx-auto">
+          <!-- Garis Tengah -->
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gray-300 h-full"></div>
+
+          <!-- Items -->
+          <div class="space-y-16">
+
+            <!-- 2023 - Left -->
+            <div class="relative flex justify-end">
+             <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-orange-400 rounded-full border-4 border-blue-500"></div>
+              <div class="w-1/2 pl-10 text-left">
+                <h3 class="text-xl font-bold text-white">2024</h3>
+                <p class="text-gray-100">lorem ipsum sir alet et alor kimak</p>
+              </div>
+            </div>
+
+            <!-- 2024 - Right -->
+            <div class="relative flex justify-start">
+              <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-green-400 rounded-full border-4 border-blue-500"></div>
+              <div class="w-1/2 pr-10 text-right">
+                <h3 class="text-xl font-bold text-white">2025</h3>
+                <p class="text-gray-100">lorem ipsum sir alet et alor kimak</p>
+              </div>
+            </div>
+
+            <!-- 2025 - Left -->
+            <div class="relative flex justify-end">
+               <div class="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-yellow-400 rounded-full border-4 border-blue-500"></div>
+              <div class="w-1/2 pl-10 text-left">
+                <h3 class="text-xl font-bold text-white">2024</h3>
+                <p class="text-gray-100">lorem ipsum sir alet et alor kimak</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+<!-- Header -->
+<header class="text-center py-10" id="search">
+  <img src="assets/image/cakralogy.png" alt="robot" class="w-24 mx-auto">
+  <h1 class="text-3xl md:text-4xl font-bold text-white mt-4">Learning Center</h1>
+</header>
+
+<!-- Filter -->
+<div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-10 px-4">
+  <select id="categoryFilter" class="px-4 py-2 rounded-lg border border-gray-300">
+    <option value="all">All Categories</option>
+    <option value="Frontend">Frontend</option>
+    <option value="Backend">Backend</option>
+    <option value="Database">Database</option>
+    <option value="AI">AI</option>
+    <option value="Security">Security</option>
+    <option value="Cloud">Cloud</option>
+  </select>
+  <input id="searchInput" type="text" placeholder="Search......"
+    class="px-4 py-2 rounded-lg border border-gray-300 w-full md:w-64">
+</div>
+
+<!-- Learning Grid -->
+<section class="max-w-7xl mx-auto px-4">
+  <div id="learningGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+    <!-- Template Card Example -->
+    <div class="bg-white rounded-xl shadow-md p-6 text-center" data-title="Computer Science" data-category="Frontend" data-aos="fade-up">
+      <div class="text-4xl mb-4">💻</div>
+      <h3 class="text-lg font-bold">Computer Science</h3>
+      <p class="text-gray-600 mt-2 text-sm">Learn the basics of Computer Science.</p>
+      <button
+        class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full font-semibold hover:bg-blue-600 transition"><a href="">Read More</a></button>
+      <button
+        class="mt-2 px-6 py-2 bg-green-500 text-white rounded-full font-semibold hover:bg-green-600 transition add-btn">+</button>
+    </div>
+
+    <!-- Tambahan Card -->
+    <div class="bg-white rounded-xl shadow-md p-6 text-center" data-title="HTML & CSS" data-category="Frontend" data-aos="fade-up">
+      <div class="text-4xl mb-4">🌐</div>
+      <h3 class="text-lg font-bold">HTML & CSS</h3>
+      <p class="text-gray-600 mt-2 text-sm">Learn web structure & styling.</p>
+      <button class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full"><a href="">Read More</a></button>
+      <button class="mt-2 px-6 py-2 bg-green-500 text-white rounded-full add-btn">+</button>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6 text-center" data-title="JavaScript" data-category="Frontend" data-aos="fade-up">
+      <div class="text-4xl mb-4">🟨</div>
+      <h3 class="text-lg font-bold">JavaScript</h3>
+      <p class="text-gray-600 mt-2 text-sm">Learn dynamic web scripting.</p>
+      <button class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full"><a href="">Read More</a></button>
+      <button class="mt-2 px-6 py-2 bg-green-500 text-white rounded-full add-btn">+</button>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6 text-center" data-title="ReactJS" data-category="Frontend" data-aos="fade-up">
+      <div class="text-4xl mb-4">⚛️</div>
+      <h3 class="text-lg font-bold">ReactJS</h3>
+      <p class="text-gray-600 mt-2 text-sm">Build modern UI with React.</p>
+      <button class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full"><a href="">Read More</a></button>
+      <button class="mt-2 px-6 py-2 bg-green-500 text-white rounded-full add-btn">+</button>
+    </div>
+
+    <!-- Tambahan sesuai permintaan -->
+    <div class="bg-white rounded-xl shadow-md p-6 text-center" data-title="Node.js" data-category="Backend" data-aos="fade-up">
+      <div class="text-4xl mb-4">🟩</div>
+      <h3 class="text-lg font-bold">Node.js</h3>
+      <p class="text-gray-600 mt-2 text-sm">JavaScript runtime for backend.</p>
+      <button class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full"><a href="">Read More</a></button>
+      <button class="mt-2 px-6 py-2 bg-green-500 text-white rounded-full add-btn">+</button>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6 text-center" data-title="SQL" data-category="Database" data-aos="fade-up">
+      <div class="text-4xl mb-4">🗄️</div>
+      <h3 class="text-lg font-bold">SQL</h3>
+      <p class="text-gray-600 mt-2 text-sm">Database query language.</p>
+      <button class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full">Read More</button>
+      <button class="mt-2 px-6 py-2 bg-green-500 text-white rounded-full add-btn">+</button>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6 text-center" data-title="Python" data-category="Backend" data-aos="fade-up">
+      <div class="text-4xl mb-4">🐍</div>
+      <h3 class="text-lg font-bold">Python</h3>
+      <p class="text-gray-600 mt-2 text-sm">Powerful general-purpose language.</p>
+      <button class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full"><a href="">Read More</a></button>
+      <button class="mt-2 px-6 py-2 bg-green-500 text-white rounded-full add-btn">+</button>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6 text-center" data-title="Artificial Intelligence" data-category="AI" data-aos="fade-up">
+      <div class="text-4xl mb-4">🤖</div>
+      <h3 class="text-lg font-bold">Artificial Intelligence</h3>
+      <p class="text-gray-600 mt-2 text-sm">Learn AI & Machine Learning.</p>
+      <button class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full"><a href="">Read More</a></button>
+      <button class="mt-2 px-6 py-2 bg-green-500 text-white rounded-full add-btn">+</button>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6 text-center" data-title="C++" data-category="Backend" data-aos="fade-up">
+      <div class="text-4xl mb-4">💠</div>
+      <h3 class="text-lg font-bold">C++</h3>
+      <p class="text-gray-600 mt-2 text-sm">High-performance programming.</p>
+      <button class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full"><a href="">Read More</a></button>
+      <button class="mt-2 px-6 py-2 bg-green-500 text-white rounded-full add-btn">+</button>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6 text-center" data-title="Cloud Computing" data-category="Cloud" data-aos="fade-up">
+      <div class="text-4xl mb-4">☁️</div>
+      <h3 class="text-lg font-bold">Cloud Computing</h3>
+      <p class="text-gray-600 mt-2 text-sm">Explore scalable cloud services.</p>
+      <button class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full"><a href="">Read More</a></button>
+      <button class="mt-2 px-6 py-2 bg-green-500 text-white rounded-full add-btn">+</button>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6 text-center" data-title="Network Security" data-category="Security" data-aos="fade-up">
+      <div class="text-4xl mb-4">🔒</div>
+      <h3 class="text-lg font-bold">Network Security</h3>
+      <p class="text-gray-600 mt-2 text-sm">Learn to secure networks.</p>
+      <button class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full"><a href="">Read More</a></button>
+      <button class="mt-2 px-6 py-2 bg-green-500 text-white rounded-full add-btn">+</button>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6 text-center" data-title="Java Programming" data-category="Backend" data-aos="fade-up">
+      <div class="text-4xl mb-4">☕</div>
+      <h3 class="text-lg font-bold">Java</h3>
+      <p class="text-gray-600 mt-2 text-sm">Learn robust Java programming.</p>
+      <button class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full"><a href="">Read More</a></button>
+      <button class="mt-2 px-6 py-2 bg-green-500 text-white rounded-full add-btn">+</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- My Collection -->
+<section class="mt-16 max-w-7xl mx-auto px-4">
+  <h2 class="text-2xl font-bold text-center text-white mb-8">My Collection</h2>
+  <div id="collectionGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <!-- Card hasil ditambahkan akan masuk di sini -->
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="mt-16 bg-white text-gray-700 py-6 text-center shadow-inner">
+  <p>© 2025 Our Company. All rights reserved.</p>
+  <div class="flex flex-wrap justify-center gap-4 mt-2">
+    <a href="#" class="hover:text-black">Privacy Policy</a>
+    <a href="#" class="hover:text-black">Terms of Use</a>
+  </div>
+</footer>
+
+
+<!-- Script -->
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const categoryFilter = document.getElementById('categoryFilter');
+  const learningGrid = document.getElementById('learningGrid');
+  const collectionGrid = document.getElementById('collectionGrid');
+
+  // Event Listener untuk Search dan Filter
+  searchInput.addEventListener('input', filterCards);
+  categoryFilter.addEventListener('change', filterCards);
+
+  function filterCards() {
+    const search = searchInput.value.toLowerCase();
+    const category = categoryFilter.value;
+
+    document.querySelectorAll('#learningGrid > div').forEach(card => {
+      const title = card.getAttribute('data-title').toLowerCase();
+      const cat = card.getAttribute('data-category');
+
+      const matchSearch = title.includes(search);
+      const matchCategory = category === 'all' || cat === category;
+
+      card.style.display = (matchSearch && matchCategory) ? 'block' : 'none';
+    });
+  }
+
+  // Add to Collection
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.parentElement.cloneNode(true);
+
+      // Hapus tombol "+"
+      card.querySelector('.add-btn').remove();
+
+      // Tambahkan tombol "Remove"
+      const removeBtn = document.createElement('button');
+      removeBtn.innerText = "Remove";
+      removeBtn.className =
+        "mt-4 px-6 py-2 bg-red-500 text-white rounded-full font-semibold hover:bg-red-600 transition";
+
+      removeBtn.addEventListener('click', () => {
+        card.remove();
+      });
+
+      card.appendChild(removeBtn);
+      collectionGrid.appendChild(card);
+    });
+  });
+</script>
+
+  <script>
+    // Mobile menu toggle with animation
+    const menuBtn = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let isOpen = false;
+
+    menuBtn.addEventListener('click', () => {
+      if (!isOpen) {
+        mobileMenu.classList.remove('hidden', 'dropdown-close');
+        mobileMenu.classList.add('dropdown-open');
+        isOpen = true;
+      } else {
+        mobileMenu.classList.remove('dropdown-open');
+        mobileMenu.classList.add('dropdown-close');
+        setTimeout(() => {
+          mobileMenu.classList.add('hidden');
+        }, 300);
+        isOpen = false;
+      }
+    });
+  </script>
+  
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1200,
+    once: true
+  });
+</script>
+</body>
+</html> 
